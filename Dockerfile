@@ -37,6 +37,7 @@ RUN set -x \
         gsl-dev \
         libressl-dev \
         libxml2-dev \
+        linux-headers \
         openblas-dev \
         perl \
         python3-dev \
@@ -52,11 +53,14 @@ RUN set -x \
     && echo 'options(repos = c(CRAN = "https://cloud.r-project.org/"))' >> /etc/R/Rprofile.site \
     ## R jupyter kernel
     && Rscript -e "install.packages(c('crayon', 'pbdZMQ'))" \
-    # - Workaround: fs install error
+    # - Workaround: fs-2.x install error (install 1.x version)
+    && Rscript -e "install.packages(c('httr', 'memoise', 'whisker', 'digest', 'rstudioapi', 'jsonlite', 'git2r', 'withr'))" \
     && Rscript -e "install.packages('https://github.com/r-lib/devtools/archive/v1.13.6.tar.gz', repos=NULL, type='soruce')" \
     && Rscript -e "devtools::install_github(paste0('IRkernel/', c('repr', 'IRdisplay', 'IRkernel')))" \
     && Rscript -e "IRkernel::installspec(user = FALSE)" \
     # -
+    && Rscript -e 'require(devtools);install_version("readxl", version="1.2.0")' \
+    && Rscript -e 'require(devtools);install_version("reprex", version="0.2.1")' \
     && Rscript -e 'install.packages("tidyverse")' \
     && Rscript -e 'install.packages("tidytext")' \
     ## user/owner
