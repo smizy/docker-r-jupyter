@@ -1,4 +1,4 @@
-# docker-R
+# docker-r-jupyter
 
 R with Jupyter docker image based on alpine
 
@@ -8,10 +8,10 @@ tidyverse packages, including ggplot2, dplyr, tidyr, readr, purrr, tibble, strin
 
 ```
 # run Jupyter Notebook container (see token in log)
-docker run -it --rm -p 8888:8888 -v $PWD:/code smizy/r-notebook:3.5.0-alpine
+docker run -it --rm -p 8888:8888 -v $PWD:/code smizy/r-jupyter:3.5.0-alpine
 
 # Or use PASSWORD environment variable instead of token
-docker run  -p 8888:8888 -v $PWD:/code -e PASSWORD=yoursecretpass -d smizy/r-notebook:3.5.0-alpine
+docker run  -p 8888:8888 -v $PWD:/code -e PASSWORD=yoursecretpass -d smizy/r-jupyter:3.5.0-alpine
 
 # open browser
 open http://$(docker-machine ip default):8888
@@ -22,7 +22,7 @@ open http://$(docker-machine ip default):8888
 In case of "tm"
 
 ```Dockerfile
-FROM smizy/r-notebook:3.5.0-alpine 
+FROM smizy/r-jupyter:3.5.0-alpine 
 
 USER root
 
