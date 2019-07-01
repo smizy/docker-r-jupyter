@@ -70,7 +70,7 @@ RUN set -x \
     && find /usr/lib/python3.6 -name __pycache__ | xargs rm -r \
     && rm -rf \
         /root/.[acpw]* \
-        ipaexg00301* \
+        ipaexg00401* \
     && apk del .builddeps
 
 USER jupyter
